@@ -11,7 +11,7 @@ export default {
 
       fontSize: {
         "4xl-custom": ["3rem", "1.2"], // Responsive size for logo
-        "2xl-custom": ["1.5rem", "1.2"], // Responsive size for button
+        //"2xl-custom": ["1.5rem", "1.2"], // Responsive size for button
       },
     },
   },

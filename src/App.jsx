@@ -13,17 +13,6 @@ import mobileDuo2 from "./assets/mobile_duo2.png";
 import mobileDuo3 from "./assets/mobile_duo3.png";
 import db from "../src/FirebaseConfig/firebase-config";
 
-const TextReveal = ({ children }) => (
-  <motion.div
-    initial={{ y: 100, opacity: 0 }}
-    whileInView={{ y: 0, opacity: 1 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 0.8, type: "spring" }}
-  >
-    {children}
-  </motion.div>
-);
-
 const ScrollSection = ({
   id,
   title,
@@ -41,13 +30,21 @@ const ScrollSection = ({
   });
 
   // Stage 1
-  const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  /* const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const mobileY = useTransform(scrollYProgress, [0, 0.2, 0.4], [100, 0, -100]);
   const mobileOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const newTextOpacity = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]);
   const newTextY = useTransform(scrollYProgress, [0.2, 0.4], [50, -100]);
   const stageWrapY = useTransform(scrollYProgress, [0.3, 0.4], [0, -100]);
-  const stageWrapOpacity = useTransform(scrollYProgress, [0.3, 0.4], [1, 0]);
+  const stageWrapOpacity = useTransform(scrollYProgress, [0.3, 0.4], [1, 0]);*/
+  //Without Fadeout animation
+  const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]); // Keep text visible
+  const mobileY = useTransform(scrollYProgress, [0, 0.4], [100, -100]); // Scroll mobile image up
+  const mobileOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]); // Fade in mobile image
+  const newTextOpacity = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]); // Fade in new text
+  const newTextY = useTransform(scrollYProgress, [0.2, 0.4], [50, -100]); // Scroll new text up
+  const stageWrapY = useTransform(scrollYProgress, [0.3, 0.4], [0, -100]); // Scroll entire stage up
+  const stageWrapOpacity = useTransform(scrollYProgress, [0.3, 0.4], [1, 0.4]);
 
   return (
     <section
@@ -89,8 +86,8 @@ const ScrollSection = ({
             {subtext && (
               <span className={styles?.subTextElement}>{subtext}</span>
             )}
-            {/* {stats && (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-8">
+            {stats && (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-8 mt-4">
                 {stats.map((stat, index) => (
                   <motion.div
                     key={index}
@@ -100,7 +97,7 @@ const ScrollSection = ({
                     className="p-4 border sm:p-6 rounded-2xl bg-white/5 backdrop-blur-lg border-white/10"
                   >
                     <h4 className="mb-1 text-2xl font-light sm:mb-2 sm:text-3xl">
-                      <GradientText>{stat.value}</GradientText>
+                      <p>{stat.value}</p>
                     </h4>
                     <p className="text-sm text-gray-400 sm:text-base">
                       {stat.label}
@@ -108,12 +105,12 @@ const ScrollSection = ({
                   </motion.div>
                 ))}
               </div>
-            )} */}
+            )}
           </div>
         </motion.div>
 
         {/* Content Container */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center mt-[300px] sm:mt-[400px]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center mt-[500px] sm:mt-[400px]">
           {/* Mobile Image */}
           <motion.div
             style={{
@@ -209,10 +206,10 @@ const App = () => {
       image: mobileDuo,
       styles: {
         titleElement:
-          "font-dm-sans text-6xl md:text-8xl lg:text-[156px] font-thin leading-tight",
+          "font-dm-sans text-6xl md:text-8xl lg:text-[156px] font-thin leading-tight text-[#60A5FA]",
         subTextElement:
           "font-dm-sans text-4xl md:text-4xl lg:text-8xl font-normal",
-        descElement: "font-dm-sans text-2xl lg:text-[4xl]",
+        descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
       },
     },
     // {
@@ -240,10 +237,10 @@ const App = () => {
       ],
       styles: {
         titleElement:
-          "font-dm-sans text-5xl md:text-8xl lg:text-[136px] font-thin leading-tight",
+          "font-dm-sans text-5xl md:text-8xl lg:text-[136px] font-thin leading-tight text-[#60A5FA]",
         subTextElement:
           "font-dm-sans text-4xl md:text-4xl lg:text-8xl font-normal",
-        descElement: "font-dm-sans text-2xl lg:text-[4xl]",
+        descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
       },
     },
     {
@@ -260,10 +257,10 @@ const App = () => {
       ],
       styles: {
         titleElement:
-          "font-dm-sans text-4xl md:text-4xl lg:text-8xl font-normal",
+          "font-dm-sans text-4xl md:text-4xl lg:text-8xl font-normal text-[#60A5FA]",
         subTextElement:
           "font-dm-sans text-6xl md:text-8xl lg:text-[156px] font-thin leading-tight",
-        descElement: "font-dm-sans text-2xl lg:text-[4xl]",
+        descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
       },
     },
   ];
@@ -281,7 +278,10 @@ const App = () => {
         <nav className="mx-auto max-w-7xl">
           <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 sm:p-5 z-50">
             {/* Logo */}
-            <div className="font-fingerPaint text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-gradient-to-r from-[#9B59B6] via-[#3498DB] to-[#E74C3C] bg-clip-text text-transparent">
+            <div
+              className="font-fingerPaint text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-gradient-to-r from-[#735CDD] via-[#65A7F5] to-[#FFDB00]
+ bg-clip-text text-transparent"
+            >
               Pigeon Post
             </div>
 
@@ -308,55 +308,106 @@ const App = () => {
         {/* Join Section */}
         <section
           id="join"
-          className="relative flex items-center justify-center min-h-screen px-4 pt-16 sm:px-6 sm:pt-24"
+          className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 overflow-hidden"
         >
+          {/* Animated SVG Background */}
+
           <motion.div
-            className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-8"
+            className="relative w-full max-w-4xl z-10"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl px-4">
+            <div className="flex flex-col items-center px-4">
               {/* Heading */}
-              <h2 className="font-dm-sans text-[16px] sm:text-[24px] md:text-[32px] lg:text-[46px] font-normal text-center mb-6 sm:mb-8">
-                Stay up-to-date with updates
+              <h2 className="font-dm-sans text-4xl md:text-5xl lg:text-6xl font-normal text-center mb-8 md:mb-12">
+                <span className="text-[#60A5FA]">Stay up-to-date </span>with
+                updates
               </h2>
 
               {/* Subscription Box */}
               {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="w-full">
-                  <div className="w-full bg-[#666666] rounded-full p-2 flex items-center">
-                    {/* Email Input */}
-                    <input
-                      type="text"
-                      placeholder="Enter Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="font-dm-sans w-full bg-transparent px-6 py-3  rounded-full outline-none  placeholder:text-[15px] lg:placeholder:text-[20px]"
-                    />
+                <div className="w-full max-w-2xl mx-auto mt-8">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="w-full flex flex-col md:flex-row gap-4"
+                  >
+                    <div className="w-full md:flex-grow bg-gray-800/30 backdrop-blur-sm rounded-2xl p-2 border border-gray-700/50">
+                      <input
+                        type="text"
+                        placeholder="Enter Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full bg-transparent px-6 py-4 text-lg outline-none placeholder:text-gray-400"
+                      />
+                    </div>
 
-                    {/* Subscribe Button */}
-                    <button
+                    <motion.button
                       type="submit"
                       disabled={isSubmitting}
-                      className="font-dm-sans bg-black text-white px-6 py-3 rounded-full text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
+                      className="font-lato border-2 border-white px-8 py-4 rounded-2xl text-lg md:text-xl font-medium whitespace-nowrap hover:bg-white hover:text-black"
+                      whileHover={{
+                        backgroundColor: "rgba(255, 255, 255, 1)",
+                        color: "rgba(0, 0, 0, 1)",
+                      }}
+                      transition={{ duration: 0.3 }}
                     >
                       {isSubmitting ? "Subscribing..." : "Subscribe"}
-                    </button>
-                  </div>
+                    </motion.button>
+                  </form>
 
                   {/* Error Message */}
                   {error && (
-                    <p className="font-dm-sans text-red-500 text-[12px] sm:text-[14px] md:text-[16px] mt-2 text-center">
+                    <motion.p
+                      className="text-red-400 text-base mt-4 text-center"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
                       {error}
-                    </p>
+                    </motion.p>
                   )}
-                </form>
+                </div>
               ) : (
                 // Success Message
-                <p className="font-dm-sans text-white text-[24px] sm:text-[32px] md:text-[40px] text-center">
-                  Thanks for subscribing!
-                </p>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="w-full max-w-2xl mx-auto bg-gray-800/30 backdrop-blur-sm rounded-2xl p-12 border border-gray-700/50 text-center"
+                >
+                  <motion.svg
+                    className="mx-auto mb-6"
+                    width="64"
+                    height="64"
+                    viewBox="0 0 24 24"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1, rotate: 360 }}
+                    transition={{ delay: 0.2, type: "spring" }}
+                  >
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M22 11.08V12a10 10 0 11-5.93-9.14"
+                    />
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M22 4L12 14.01l-3-3"
+                    />
+                  </motion.svg>
+                  <p className="text-3xl md:text-4xl font-dm-sans">
+                    Thanks for subscribing!
+                  </p>
+                  <p className="mt-4 text-gray-300">
+                    We'll keep you updated with the latest news.
+                  </p>
+                </motion.div>
               )}
             </div>
           </motion.div>
