@@ -1,3 +1,4 @@
+import "./App.css";
 import React, { useState, useRef } from "react";
 import {
   motion,
@@ -29,21 +30,13 @@ const ScrollSection = ({
     offset: ["start start", "end start"],
   });
 
-  // Stage 1
-  /* const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const mobileY = useTransform(scrollYProgress, [0, 0.2, 0.4], [100, 0, -100]);
+  // Animation controls
+  const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const mobileY = useTransform(scrollYProgress, [0, 0.4], [100, -100]);
   const mobileOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const newTextOpacity = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]);
   const newTextY = useTransform(scrollYProgress, [0.2, 0.4], [50, -100]);
   const stageWrapY = useTransform(scrollYProgress, [0.3, 0.4], [0, -100]);
-  const stageWrapOpacity = useTransform(scrollYProgress, [0.3, 0.4], [1, 0]);*/
-  //Without Fadeout animation
-  const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]); // Keep text visible
-  const mobileY = useTransform(scrollYProgress, [0, 0.4], [100, -100]); // Scroll mobile image up
-  const mobileOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]); // Fade in mobile image
-  const newTextOpacity = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]); // Fade in new text
-  const newTextY = useTransform(scrollYProgress, [0.2, 0.4], [50, -100]); // Scroll new text up
-  const stageWrapY = useTransform(scrollYProgress, [0.3, 0.4], [0, -100]); // Scroll entire stage up
   const stageWrapOpacity = useTransform(scrollYProgress, [0.3, 0.4], [1, 0.4]);
 
   return (
@@ -56,7 +49,7 @@ const ScrollSection = ({
         style={{ y: stageWrapY, opacity: stageWrapOpacity }}
         className="absolute inset-0"
       >
-        {/*Background image for Home Page Goes here ............*/}
+        {/*Background image for Home Page*/}
         {id == "home" && (
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center"
@@ -79,38 +72,53 @@ const ScrollSection = ({
           className="z-20 flex items-center justify-center w-full h-full mt-[30px] sm:mt-[30px]"
         >
           <div className="max-w-4xl px-4 mx-auto text-center sm:px-6">
-            {/* <span className="block mb-2 text-sm tracking-wider text-gray-400 uppercase sm:mb-4">
-              {subtext}
-            </span> */}
             {title && <h1 className={styles?.titleElement}>{title}</h1>}
+
             {subtext && (
               <span className={styles?.subTextElement}>{subtext}</span>
             )}
-            {stats && (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-8 mt-4">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.2 }}
-                    className="p-4 border sm:p-6 rounded-2xl bg-white/5 backdrop-blur-lg border-white/10"
-                  >
-                    <h4 className="mb-1 text-2xl font-light sm:mb-2 sm:text-3xl">
-                      <p>{stat.value}</p>
-                    </h4>
-                    <p className="text-sm text-gray-400 sm:text-base">
-                      {stat.label}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
+
+            {description && (
+              <motion.p
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.3,
+                  duration: 0.5,
+                  type: "spring",
+                  stiffness: 100,
+                }}
+                className="z-30 w-full max-w-sm mx-auto px-4 mt-8 sm:mt-12 text-center sm:max-w-md md:max-w-2xl sm:px-6 pb-16 sm:pb-20"
+              >
+                <p className={styles?.descElement}>{description}</p>
+              </motion.p>
             )}
+            {/* {stats && (
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-8 mt-4">
+        {stats.map((stat, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.2 }}
+            className="p-4 border sm:p-6 rounded-2xl bg-white/5 backdrop-blur-lg border-white/10"
+          >
+            <h4 className="mb-1 text-2xl font-light sm:mb-2 sm:text-3xl">
+              <p>{stat.value}</p>
+            </h4>
+            <p className="text-sm text-gray-400 sm:text-base">
+              {stat.label}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    )} */}
           </div>
         </motion.div>
 
-        {/* Content Container */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center mt-[500px] sm:mt-[400px]">
+        {/* Content Container - Modified for better mobile spacing */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center mt-[400px] xs:mt-[450px] sm:mt-[400px]">
           {/* Mobile Image */}
           <motion.div
             style={{
@@ -128,15 +136,7 @@ const ScrollSection = ({
             />
           </motion.div>
 
-          {/* Description Text */}
-          {description && (
-            <motion.div
-              style={{ opacity: newTextOpacity, y: newTextY }}
-              className="z-30 w-full max-w-sm px-4 mt-4 text-center sm:max-w-md md:max-w-2xl sm:px-6 sm:mt-8"
-            >
-              <p className={styles?.descElement}>{description}</p>
-            </motion.div>
-          )}
+          {/* Description Text - Added padding at bottom for better spacing */}
         </div>
       </motion.div>
     </section>
@@ -206,9 +206,9 @@ const App = () => {
       image: mobileDuo,
       styles: {
         titleElement:
-          "font-dm-sans text-6xl md:text-8xl lg:text-[156px] font-thin leading-tight text-[#60A5FA]",
+          "font-dm-sans text-7xl md:text-8xl lg:text-[156px] font-thin leading-tight text-[#60A5FA] sm:font-normal font-bold typing-animation",
         subTextElement:
-          "font-dm-sans text-4xl md:text-4xl lg:text-8xl font-normal",
+          "font-dm-sans text-5xl md:text-4xl lg:text-8xl font-normal",
         descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
       },
     },
@@ -237,9 +237,9 @@ const App = () => {
       ],
       styles: {
         titleElement:
-          "font-dm-sans text-5xl md:text-8xl lg:text-[136px] font-thin leading-tight text-[#60A5FA]",
+          "font-dm-sans text-7xl md:text-8xl lg:text-[136px] font-thin leading-tight text-[#60A5FA] sm:font-normal font-bold",
         subTextElement:
-          "font-dm-sans text-4xl md:text-4xl lg:text-8xl font-normal",
+          "font-dm-sans text-7xl md:text-4xl lg:text-8xl font-normal ",
         descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
       },
     },
@@ -257,9 +257,9 @@ const App = () => {
       ],
       styles: {
         titleElement:
-          "font-dm-sans text-4xl md:text-4xl lg:text-8xl font-normal text-[#60A5FA]",
+          "font-dm-sans text-6xl md:text-4xl lg:text-8xl font-normal text-[#60A5FA] mt-4 ",
         subTextElement:
-          "font-dm-sans text-6xl md:text-8xl lg:text-[156px] font-thin leading-tight",
+          "font-dm-sans text-6xl md:text-8xl lg:text-[156px] font-thin leading-tight sm:font-normal font-bold",
         descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
       },
     },
@@ -276,7 +276,7 @@ const App = () => {
         className="fixed top-0 left-0 right-0 z-50 px-4 py-2 sm:px-6 sm:py-4"
       >
         <nav className="mx-auto max-w-7xl">
-          <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 sm:p-5 z-50">
+          <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 sm:p-5 z-50 backdrop-blur-sm">
             {/* Logo */}
             <div
               className="font-fingerPaint text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-gradient-to-r from-[#735CDD] via-[#65A7F5] to-[#FFDB00]
@@ -321,7 +321,7 @@ const App = () => {
           >
             <div className="flex flex-col items-center px-4">
               {/* Heading */}
-              <h2 className="font-dm-sans text-4xl md:text-5xl lg:text-6xl font-normal text-center mb-8 md:mb-12">
+              <h2 className="font-dm-sans text-5xl md:text-5xl lg:text-6xl font-normal text-center mb-8 md:mb-12">
                 <span className="text-[#60A5FA]">Stay up-to-date </span>with
                 updates
               </h2>
@@ -333,23 +333,22 @@ const App = () => {
                     onSubmit={handleSubmit}
                     className="w-full flex flex-col md:flex-row gap-4"
                   >
-                    <div className="w-full md:flex-grow bg-gray-800/30 backdrop-blur-sm rounded-2xl p-2 border border-gray-700/50">
+                    <div className="w-full md:flex-grow bg-gray-800/30 backdrop-blur-sm rounded-2xl p-2 border border-white/70">
                       <input
                         type="text"
                         placeholder="Enter Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-transparent px-6 py-4 text-lg outline-none placeholder:text-gray-400"
+                        className="w-full bg-transparent px-6 py-3 text-lg outline-none placeholder:text-gray-400"
                       />
                     </div>
 
                     <motion.button
                       type="submit"
                       disabled={isSubmitting}
-                      className="font-lato border-2 border-white px-8 py-4 rounded-2xl text-lg md:text-xl font-medium whitespace-nowrap hover:bg-white hover:text-black"
+                      className="font-dm-sans bg-white text-black px-6 py-3 rounded-2xl text-lg font-medium whitespace-nowrap hover:bg-gray-200 transition-colors"
                       whileHover={{
-                        backgroundColor: "rgba(255, 255, 255, 1)",
-                        color: "rgba(0, 0, 0, 1)",
+                        backgroundColor: "rgba(229, 231, 235, 1)",
                       }}
                       transition={{ duration: 0.3 }}
                     >
@@ -373,7 +372,7 @@ const App = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="w-full max-w-2xl mx-auto bg-gray-800/30 backdrop-blur-sm rounded-2xl p-12 border border-gray-700/50 text-center"
+                  className="w-full max-w-2xl mx-auto bg-gray-800/30 backdrop-blur-sm rounded-2xl p-12 border border-white/70 text-center"
                 >
                   <motion.svg
                     className="mx-auto mb-6"
@@ -423,7 +422,7 @@ const App = () => {
                   whileHover={{ scale: 1.02 }}
                   className="flex items-center gap-2"
                 >
-                  <h3 className="font-fingerPaint text-xl bg-gradient-to-r from-[#9B59B6] via-[#3498DB] to-[#E74C3C] bg-clip-text text-transparent">
+                  <h3 className="font-fingerPaint text-xl bg-gradient-to-r from-[#735CDD] via-[#65A7F5] to-[#FFDB00] bg-clip-text text-transparent">
                     Pigeon Post
                   </h3>
                 </motion.div>
@@ -435,9 +434,9 @@ const App = () => {
 
               {/* Resources */}
               <div>
-                <h3 className="mb-4 text-lg font-medium">Resources</h3>
+                <h3 className="mb-4 text-lg font-medium">Legal</h3>
                 <ul className="space-y-2">
-                  {["Documentation", "Tutorials", "Blog", "Support"].map(
+                  {["Privacy Policy", "Terms of Service", "Security"].map(
                     (item) => (
                       <li key={item}>
                         <motion.a
