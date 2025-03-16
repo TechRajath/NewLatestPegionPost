@@ -34,8 +34,6 @@ const ScrollSection = ({
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const mobileY = useTransform(scrollYProgress, [0, 0.4], [100, -100]);
   const mobileOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const newTextOpacity = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]);
-  const newTextY = useTransform(scrollYProgress, [0.2, 0.4], [50, -100]);
   const stageWrapY = useTransform(scrollYProgress, [0.3, 0.4], [0, -100]);
   const stageWrapOpacity = useTransform(scrollYProgress, [0.3, 0.4], [1, 0.4]);
 
@@ -49,29 +47,12 @@ const ScrollSection = ({
         style={{ y: stageWrapY, opacity: stageWrapOpacity }}
         className="absolute inset-0"
       >
-        {/*Background image for Home Page*/}
-        {id == "home" && (
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center"
-            style={{
-              opacity: textOpacity,
-              backgroundImage: `url(${leaf})`,
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              width: "80%",
-              height: "80%",
-              maxWidth: "600px",
-              maxHeight: "600px",
-            }}
-          />
-        )}
         {/* Initial Text */}
         <motion.div
           style={{ opacity: textOpacity }}
-          className="z-20 flex items-center justify-center w-full h-full mt-[30px] sm:mt-[30px]"
+          className="flex items-center justify-center w-full h-full mt-[30px] sm:mt-[30px]"
         >
-          <div className="max-w-4xl px-4 mx-auto text-center sm:px-6">
+          <div className="max-w-4xl px-4 mx-auto text-center sm:px-6 z-20">
             {title && <h1 className={styles?.titleElement}>{title}</h1>}
 
             {subtext && (
@@ -94,29 +75,25 @@ const ScrollSection = ({
                 <p className={styles?.descElement}>{description}</p>
               </motion.p>
             )}
-            {/* {stats && (
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-8 mt-4">
-        {stats.map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-            className="p-4 border sm:p-6 rounded-2xl bg-white/5 backdrop-blur-lg border-white/10"
-          >
-            <h4 className="mb-1 text-2xl font-light sm:mb-2 sm:text-3xl">
-              <p>{stat.value}</p>
-            </h4>
-            <p className="text-sm text-gray-400 sm:text-base">
-              {stat.label}
-            </p>
-          </motion.div>
-        ))}
-      </div>
-    )} */}
           </div>
         </motion.div>
-
+        {/*Background image for Home Page*/}
+        {id == "home" && (
+          <motion.div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center" // Use z-0 instead of z-[-1]
+            style={{
+              opacity: textOpacity,
+              backgroundImage: `url(${leaf})`,
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              width: "50%",
+              height: "50%",
+              maxWidth: "600px",
+              maxHeight: "600px",
+            }}
+          />
+        )}
         {/* Content Container - Modified for better mobile spacing */}
         <div className="absolute inset-0 flex flex-col items-center justify-center mt-[400px] xs:mt-[450px] sm:mt-[400px]">
           {/* Mobile Image */}
@@ -202,14 +179,15 @@ const App = () => {
       title: "Creativity",
       subtext: "Beyond Limits",
       description:
-        "Pigeon Post is built for boundless. For creators who want to break through barriers and redefine what's possible.",
+        "Pigeon Post is built for boundless. For creators who want to break through barriers",
       image: mobileDuo,
       styles: {
         titleElement:
-          "font-dm-sans text-7xl md:text-8xl lg:text-[156px] font-thin leading-tight text-[#60A5FA] sm:font-normal font-bold typing-animation",
+          "font-dm-sans text-7xl md:text-8xl lg:text-[156px] text-textColorCustom",
         subTextElement:
-          "font-dm-sans text-5xl md:text-4xl lg:text-8xl font-normal",
-        descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
+          "font-dm-sans text-5xl md:text-4xl lg:text-8xl font-normal text-textColorCustom",
+        descElement:
+          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
       },
     },
     // {
@@ -227,8 +205,19 @@ const App = () => {
       id: "platform",
       title: "One Platform",
       subtext: "Infinite Potential",
-      description:
-        "Experience limitless possibilities within a single platform. Create, collaborate, and innovate without boundaries.",
+      description: (
+        <>
+          Everything you need, together in one place. No friction, no barriers—{" "}
+          <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
+            just the space to{" "}
+            <span className="font-semibold text-2xl sm:text-2xl md:text-3xl lg:text-4xl">
+              create{" "}
+            </span>
+            your best work.
+          </span>
+        </>
+      ),
+
       image: mobileDuo2,
       stats: [
         { value: "100+", label: "Creative Tools" },
@@ -237,18 +226,25 @@ const App = () => {
       ],
       styles: {
         titleElement:
-          "font-dm-sans text-7xl md:text-8xl lg:text-[136px] font-thin leading-tight text-[#60A5FA] sm:font-normal font-bold",
+          "font-dm-sans text-6xl md:text-8xl lg:text-[136px] text-textColorCustom",
         subTextElement:
-          "font-dm-sans text-7xl md:text-4xl lg:text-8xl font-normal ",
-        descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
+          "font-dm-sans text-4xl md:text-4xl lg:text-8xl  mt-4 text-textColorCustom",
+        descElement:
+          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
       },
     },
     {
       id: "future",
       title: "Not Just a Platform",
       subtext: "A New Era",
-      description:
-        "A place where creators write the future, together. Welcome to the next generation of creativity.",
+      description: (
+        <>
+          A place where creators write the future, together;{" "}
+          <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
+            Welcome to the next generation of creativity
+          </span>
+        </>
+      ),
       image: mobileDuo3,
       stats: [
         { value: "Next-Gen", label: "Technology" },
@@ -257,10 +253,11 @@ const App = () => {
       ],
       styles: {
         titleElement:
-          "font-dm-sans text-6xl md:text-4xl lg:text-8xl font-normal text-[#60A5FA] mt-4 ",
+          "font-dm-sans text-4xl md:text-4xl lg:text-8xl  mt-4 text-textColorCustom",
         subTextElement:
-          "font-dm-sans text-6xl md:text-8xl lg:text-[156px] font-thin leading-tight sm:font-normal font-bold",
-        descElement: "font-dm-sans text-[20px] lg:text-[4xl]",
+          "font-dm-sans text-6xl md:text-8xl lg:text-[136px] text-textColorCustom",
+        descElement:
+          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
       },
     },
   ];
@@ -310,103 +307,57 @@ const App = () => {
           id="join"
           className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 overflow-hidden"
         >
-          {/* Animated SVG Background */}
-
           <motion.div
-            className="relative w-full max-w-4xl z-10"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-8"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 10,
+            }}
           >
-            <div className="flex flex-col items-center px-4">
+            <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl px-4">
               {/* Heading */}
-              <h2 className="font-dm-sans text-5xl md:text-5xl lg:text-6xl font-normal text-center mb-8 md:mb-12">
-                <span className="text-[#60A5FA]">Stay up-to-date </span>with
-                updates
+              <h2 className="font-dm-sans text-[16px] sm:text-[24px] md:text-[32px] lg:text-[46px] font-normal text-center mb-6 sm:mb-8 text-textColorCustom">
+                Stay up-to-date with updates
               </h2>
 
               {/* Subscription Box */}
               {!isSubmitted ? (
-                <div className="w-full max-w-2xl mx-auto mt-8">
-                  <form
-                    onSubmit={handleSubmit}
-                    className="w-full flex flex-col md:flex-row gap-4"
-                  >
-                    <div className="w-full md:flex-grow bg-gray-800/30 backdrop-blur-sm rounded-2xl p-2 border border-white/70">
-                      <input
-                        type="text"
-                        placeholder="Enter Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-transparent px-6 py-3 text-lg outline-none placeholder:text-gray-400"
-                      />
-                    </div>
+                <form onSubmit={handleSubmit} className="w-full">
+                  <div className="w-full bg-[#666666] rounded-full p-2 flex items-center">
+                    {/* Email Input */}
+                    <input
+                      type="text"
+                      placeholder="Enter Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="font-dm-sans w-full bg-transparent px-6 py-3  rounded-full outline-none  placeholder:text-[15px] lg:placeholder:text-[20px] placeholder:font-dm-sans"
+                    />
 
-                    <motion.button
+                    {/* Subscribe Button */}
+                    <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="font-dm-sans bg-white text-black px-6 py-3 rounded-2xl text-lg font-medium whitespace-nowrap hover:bg-gray-200 transition-colors"
-                      whileHover={{
-                        backgroundColor: "rgba(229, 231, 235, 1)",
-                      }}
-                      transition={{ duration: 0.3 }}
+                      className="font-dm-sans bg-black text-textColorCustom px-6 py-3 rounded-full text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
                     >
                       {isSubmitting ? "Subscribing..." : "Subscribe"}
-                    </motion.button>
-                  </form>
+                    </button>
+                  </div>
 
                   {/* Error Message */}
                   {error && (
-                    <motion.p
-                      className="text-red-400 text-base mt-4 text-center"
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                    >
+                    <p className="font-dm-sans text-red-500 text-[12px] sm:text-[14px] md:text-[16px] mt-2 text-center">
                       {error}
-                    </motion.p>
+                    </p>
                   )}
-                </div>
+                </form>
               ) : (
                 // Success Message
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="w-full max-w-2xl mx-auto bg-gray-800/30 backdrop-blur-sm rounded-2xl p-12 border border-white/70 text-center"
-                >
-                  <motion.svg
-                    className="mx-auto mb-6"
-                    width="64"
-                    height="64"
-                    viewBox="0 0 24 24"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1, rotate: 360 }}
-                    transition={{ delay: 0.2, type: "spring" }}
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M22 11.08V12a10 10 0 11-5.93-9.14"
-                    />
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M22 4L12 14.01l-3-3"
-                    />
-                  </motion.svg>
-                  <p className="text-3xl md:text-4xl font-dm-sans">
-                    Thanks for subscribing!
-                  </p>
-                  <p className="mt-4 text-gray-300">
-                    We'll keep you updated with the latest news.
-                  </p>
-                </motion.div>
+                <p className="font-dm-sans text-white text-[24px] sm:text-[32px] md:text-[40px] text-center">
+                  Thanks for subscribing!
+                </p>
               )}
             </div>
           </motion.div>

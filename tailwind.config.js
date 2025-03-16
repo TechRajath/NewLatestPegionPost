@@ -13,6 +13,9 @@ export default {
         "4xl-custom": ["3rem", "1.2"], // Responsive size for logo
         //"2xl-custom": ["1.5rem", "1.2"], // Responsive size for button
       },
+      colors: {
+        textColorCustom: "#E0DDD6",
+      },
       theme: {
         screens: {
           xs: "375px",
