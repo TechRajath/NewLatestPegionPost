@@ -52,7 +52,7 @@ const ScrollSection = ({
           style={{ opacity: textOpacity }}
           className="flex items-center justify-center w-full h-full mt-[30px] sm:mt-[30px]"
         >
-          <div className="px-4 mx-auto text-center sm:px-6 z-20">
+          <div className="max-w-4xl px-4 mx-auto text-center sm:px-6 z-20">
             {title && <h1 className={styles?.titleElement}>{title}</h1>}
 
             {subtext && (
@@ -70,7 +70,7 @@ const ScrollSection = ({
                   type: "spring",
                   stiffness: 100,
                 }}
-                className="z-30 w-full mx-auto px-4 mt-8 sm:mt-12 text-center  sm:px-6 pb-16 sm:pb-20"
+                className="z-30 w-full max-w-sm mx-auto px-4 mt-8 sm:mt-12 text-center sm:max-w-md md:max-w-2xl sm:px-6 pb-16 sm:pb-20"
               >
                 <p className={styles?.descElement}>{description}</p>
               </motion.p>
@@ -178,45 +178,45 @@ const App = () => {
       id: "home",
       title: "Creativity",
       subtext: "Beyond Limits",
-      // description:
-      //   "Pigeon Post is built for boundless. For creators who want to break through barriers",
+      description:
+        "Pigeon Post is built for boundless. For creators who want to break through barriers",
       image: mobileDuo,
       styles: {
         titleElement:
           "font-dm-sans text-7xl md:text-8xl lg:text-[156px] text-textColorCustom",
         subTextElement:
           "font-dm-sans text-5xl md:text-4xl lg:text-8xl font-normal text-textColorCustom",
-        // descElement:
-        //   "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
-      },
-    },
-    {
-      id: "homeDesc",
-      description:
-        "Pigeon Post is built for boundless. For creators who want to break through barriers and redefine what's possible.",
-
-      styles: {
         descElement:
-          "font-dm-sans text-[20px] md:text-[30px] lg:text-[40px] text-textColorCustom w-full lg:w-[80%] mx-auto text-center leading-tight lg:leading-[1.2]",
+          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
       },
     },
+    // {
+    //   id: "homeDesc",
+    //   description:
+    //     "Pigeon Post is built for boundless. For creators who want to break through barriers and redefine what's possible.",
+
+    //   styles: {
+    //     descElement:
+    //       "font-dm-sans text-[32px] md:text-[48px] text-center max-w-[90%] sm:max-w-[80%] md:max-w-[60%] px-4",
+    //   },
+    // },
 
     {
       id: "platform",
       title: "One Platform",
       subtext: "Infinite Potential",
-      // description: (
-      //   <>
-      //     Everything you need, together in one place. No friction, no barriers—{" "}
-      //     <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
-      //       just the space to{" "}
-      //       <span className="font-semibold text-2xl sm:text-2xl md:text-3xl lg:text-4xl">
-      //         create{" "}
-      //       </span>
-      //       your best work.
-      //     </span>
-      //   </>
-      // ),
+      description: (
+        <>
+          Everything you need, together in one place. No friction, no barriers—{" "}
+          <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
+            just the space to{" "}
+            <span className="font-semibold text-2xl sm:text-2xl md:text-3xl lg:text-4xl">
+              create{" "}
+            </span>
+            your best work.
+          </span>
+        </>
+      ),
 
       image: mobileDuo2,
       stats: [
@@ -229,42 +229,22 @@ const App = () => {
           "font-dm-sans text-6xl md:text-8xl lg:text-[136px] text-textColorCustom",
         subTextElement:
           "font-dm-sans text-4xl md:text-4xl lg:text-8xl  mt-4 text-textColorCustom",
-        // descElement:
-        //   "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
+        descElement:
+          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
       },
     },
-    {
-      id: "platformDesc",
-      description: (
-        <>
-          <span className="text-[20px] md:text-[30px] lg:text-[40px]">
-            Everything you need, together in one place. No friction, no
-            barriers—{" "}
-          </span>
-          <span className="text-[25px] md:text-[40px] lg:text-[50px] block w-full">
-            just the space to <span className="font-semibold">create </span>
-            your best work.
-          </span>
-        </>
-      ),
-
-      styles: {
-        descElement: "font-dm-sans  text-textColorCustom",
-      },
-    },
-
     {
       id: "future",
       title: "Not Just a Platform",
       subtext: "A New Era",
-      // description: (
-      //   <>
-      //     A place where creators write the future, together;{" "}
-      //     <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
-      //       Welcome to the next generation of creativity
-      //     </span>
-      //   </>
-      // ),
+      description: (
+        <>
+          A place where creators write the future, together;{" "}
+          <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
+            Welcome to the next generation of creativity
+          </span>
+        </>
+      ),
       image: mobileDuo3,
       stats: [
         { value: "Next-Gen", label: "Technology" },
@@ -276,25 +256,8 @@ const App = () => {
           "font-dm-sans text-4xl md:text-4xl lg:text-8xl  mt-4 text-textColorCustom",
         subTextElement:
           "font-dm-sans text-6xl md:text-8xl lg:text-[136px] text-textColorCustom",
-        // descElement:
-        //   "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
-      },
-    },
-    {
-      id: "futureDesc",
-      description: (
-        <>
-          <span className="text-[20px] md:text-[30px] lg:text-[40px]">
-            A place where creators write the future, together;{" "}
-          </span>
-          <span className="text-[25px] md:text-[40px] lg:text-[50px] block w-full">
-            Welcome to the next generation of creativity
-          </span>
-        </>
-      ),
-
-      styles: {
-        descElement: "font-dm-sans text-textColorCustom",
+        descElement:
+          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
       },
     },
   ];
