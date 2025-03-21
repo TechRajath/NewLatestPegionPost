@@ -370,14 +370,15 @@ const App = () => {
                       placeholder="Enter Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="font-dm-sans w-full bg-transparent px-6 py-3  rounded-full outline-none  placeholder:text-[15px] lg:placeholder:text-[20px] placeholder:font-dm-sans"
+                      className="font-dm-sans w-full bg-transparent px-6 py-3 rounded-full outline-none placeholder:text-[15px] lg:placeholder:text-[20px] placeholder:font-dm-sans"
                     />
 
                     {/* Subscribe Button */}
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="font-dm-sans bg-black text-textColorCustom px-6 py-3 rounded-full text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
+                      className="font-dm-sans bg-black text-textColorCustom px-6 py-3 rounded-full text-[16px]"
+                      // Consistent padding and text size
                     >
                       {isSubmitting ? "Subscribing..." : "Subscribe"}
                     </button>
