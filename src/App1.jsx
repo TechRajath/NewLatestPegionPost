@@ -53,7 +53,7 @@ const ScrollSection = ({
           className="flex items-center justify-center w-full h-full mt-[30px] sm:mt-[30px]"
         >
           <div className="max-w-4xl px-4 mx-auto text-center sm:px-6 z-20">
-            {title && <h1 className={styles?.titleElement}>{title}</h1>}
+            {title && <p className={styles?.titleElement}>{title}</p>}
 
             {subtext && (
               <span className={styles?.subTextElement}>{subtext}</span>
@@ -120,7 +120,7 @@ const ScrollSection = ({
   );
 };
 
-const App = () => {
+const App1 = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -182,7 +182,7 @@ const App = () => {
         "Pigeon Post is built for boundless. For creators who want to break through barriers",
       image: mobileDuo,
       styles: {
-        titleElement:
+         titleElement:
           "font-dm-sans text-7xl md:text-8xl lg:text-[156px] text-textColorCustom",
         subTextElement:
           "font-dm-sans text-5xl md:text-4xl lg:text-8xl font-normal text-textColorCustom",
@@ -210,7 +210,7 @@ const App = () => {
           Everything you need, together in one place. No friction, no barriers—{" "}
           <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
             just the space to{" "}
-            <span className="font-semibold text-2xl sm:text-2xl md:text-3xl lg:text-4xl">
+            <span className=" text-4xl sm:text-3xl md:text-3xl lg:text-5xl">
               create{" "}
             </span>
             your best work.
@@ -253,7 +253,7 @@ const App = () => {
       ],
       styles: {
         titleElement:
-          "font-dm-sans text-4xl md:text-4xl lg:text-8xl  mt-4 text-textColorCustom",
+          "titleElement: font-dm-sans text-4xl md:text-4xl lg:text-8xl mt-4 text-textColorCustom opacity-80",
         subTextElement:
           "font-dm-sans text-6xl md:text-8xl lg:text-[136px] text-textColorCustom",
         descElement:
@@ -452,4 +452,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App1;
