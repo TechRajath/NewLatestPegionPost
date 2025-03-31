@@ -1,5 +1,4 @@
 import "./App.css";
-import { FaTwitter, FaDiscord, FaGithub, FaLinkedin } from "react-icons/fa";
 import React, { useState, useRef } from "react";
 import {
   motion,
@@ -13,7 +12,7 @@ import leaf from "./assets/leaf.png";
 import mobileDuo from "./assets/mobile_duo1.png";
 import mobileDuo2 from "./assets/mobile_duo2.png";
 import mobileDuo3 from "./assets/mobile_duo3.png";
-import db from "../src/FirebaseConfig/firebase-config";
+import db from "../FirebaseConfig/firebase-config";
 
 const ScrollSection = ({
   id,
@@ -53,8 +52,8 @@ const ScrollSection = ({
           style={{ opacity: textOpacity }}
           className="flex items-center justify-center w-full h-full mt-[30px] sm:mt-[30px]"
         >
-          <div className="max-w-4xl px-4 mx-auto text-center sm:px-6 z-20">
-            {title && <p className={styles?.titleElement}>{title}</p>}
+          <div className="px-4 mx-auto text-center sm:px-6 z-20">
+            {title && <h1 className={styles?.titleElement}>{title}</h1>}
 
             {subtext && (
               <span className={styles?.subTextElement}>{subtext}</span>
@@ -71,7 +70,7 @@ const ScrollSection = ({
                   type: "spring",
                   stiffness: 100,
                 }}
-                className="z-30 w-full max-w-sm mx-auto px-4 mt-8 sm:mt-12 text-center sm:max-w-md md:max-w-2xl sm:px-6 pb-16 sm:pb-20"
+                className="z-30 w-full mx-auto px-4 mt-8 sm:mt-12 text-center  sm:px-6 pb-16 sm:pb-20"
               >
                 <p className={styles?.descElement}>{description}</p>
               </motion.p>
@@ -121,7 +120,7 @@ const ScrollSection = ({
   );
 };
 
-const App1 = () => {
+const App = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -179,45 +178,45 @@ const App1 = () => {
       id: "home",
       title: "Creativity",
       subtext: "Beyond Limits",
-      description:
-        "Pigeon Post is built for boundless. For creators who want to break through barriers",
+      // description:
+      //   "Pigeon Post is built for boundless. For creators who want to break through barriers",
       image: mobileDuo,
       styles: {
-         titleElement:
+        titleElement:
           "font-dm-sans text-7xl md:text-8xl lg:text-[156px] text-textColorCustom",
         subTextElement:
           "font-dm-sans text-5xl md:text-4xl lg:text-8xl font-normal text-textColorCustom",
-        descElement:
-          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
+        // descElement:
+        //   "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
       },
     },
-    // {
-    //   id: "homeDesc",
-    //   description:
-    //     "Pigeon Post is built for boundless. For creators who want to break through barriers and redefine what's possible.",
+    {
+      id: "homeDesc",
+      description:
+        "Pigeon Post is built for boundless. For creators who want to break through barriers and redefine what's possible.",
 
-    //   styles: {
-    //     descElement:
-    //       "font-dm-sans text-[32px] md:text-[48px] text-center max-w-[90%] sm:max-w-[80%] md:max-w-[60%] px-4",
-    //   },
-    // },
+      styles: {
+        descElement:
+          "font-dm-sans text-[20px] md:text-[30px] lg:text-[40px] text-textColorCustom w-full lg:w-[80%] mx-auto text-center leading-tight lg:leading-[1.2]",
+      },
+    },
 
     {
       id: "platform",
       title: "One Platform",
       subtext: "Infinite Potential",
-      description: (
-        <>
-          Everything you need, together in one place. No friction, no barriers{" "}
-          <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
-            -just the space to{" "}
-            <span className=" text-4xl sm:text-3xl md:text-3xl lg:text-5xl">
-              create{" "}
-            </span>
-            your best work.
-          </span>
-        </>
-      ),
+      // description: (
+      //   <>
+      //     Everything you need, together in one place. No friction, no barriers—{" "}
+      //     <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
+      //       just the space to{" "}
+      //       <span className="font-semibold text-2xl sm:text-2xl md:text-3xl lg:text-4xl">
+      //         create{" "}
+      //       </span>
+      //       your best work.
+      //     </span>
+      //   </>
+      // ),
 
       image: mobileDuo2,
       stats: [
@@ -230,22 +229,42 @@ const App1 = () => {
           "font-dm-sans text-6xl md:text-8xl lg:text-[136px] text-textColorCustom",
         subTextElement:
           "font-dm-sans text-4xl md:text-4xl lg:text-8xl  mt-4 text-textColorCustom",
-        descElement:
-          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
+        // descElement:
+        //   "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
       },
     },
+    {
+      id: "platformDesc",
+      description: (
+        <>
+          <span className="text-[20px] md:text-[30px] lg:text-[40px]">
+            Everything you need, together in one place. No friction, no
+            barriers—{" "}
+          </span>
+          <span className="text-[25px] md:text-[40px] lg:text-[50px] block w-full">
+            just the space to <span className="font-semibold">create </span>
+            your best work.
+          </span>
+        </>
+      ),
+
+      styles: {
+        descElement: "font-dm-sans  text-textColorCustom",
+      },
+    },
+
     {
       id: "future",
       title: "Not Just a Platform",
       subtext: "A New Era",
-      description: (
-        <>
-          A place where creators write the future, together;{" "}
-          <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
-            Welcome to the next generation of creativity
-          </span>
-        </>
-      ),
+      // description: (
+      //   <>
+      //     A place where creators write the future, together;{" "}
+      //     <span className="text-2xl md:text-2xl lg:text-3xl block w-full">
+      //       Welcome to the next generation of creativity
+      //     </span>
+      //   </>
+      // ),
       image: mobileDuo3,
       stats: [
         { value: "Next-Gen", label: "Technology" },
@@ -254,11 +273,28 @@ const App1 = () => {
       ],
       styles: {
         titleElement:
-          "font-dm-sans text-4xl md:text-4xl lg:text-7xl  mt-4 text-textColorCustom",
+          "font-dm-sans text-4xl md:text-4xl lg:text-8xl  mt-4 text-textColorCustom",
         subTextElement:
           "font-dm-sans text-6xl md:text-8xl lg:text-[136px] text-textColorCustom",
-        descElement:
-          "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
+        // descElement:
+        //   "font-dm-sans text-[20px] lg:text-[4xl] text-textColorCustom",
+      },
+    },
+    {
+      id: "futureDesc",
+      description: (
+        <>
+          <span className="text-[20px] md:text-[30px] lg:text-[40px]">
+            A place where creators write the future, together;{" "}
+          </span>
+          <span className="text-[25px] md:text-[40px] lg:text-[50px] block w-full">
+            Welcome to the next generation of creativity
+          </span>
+        </>
+      ),
+
+      styles: {
+        descElement: "font-dm-sans text-textColorCustom",
       },
     },
   ];
@@ -274,11 +310,11 @@ const App1 = () => {
         className="fixed top-0 left-0 right-0 z-50 px-4 py-2 sm:px-6 sm:py-4"
       >
         <nav className="mx-auto max-w-7xl">
-          <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 sm:p-5 z-50 ">
+          <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 sm:p-5 z-50 backdrop-blur-sm">
             {/* Logo */}
             <div
               className="font-fingerPaint text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-gradient-to-r from-[#735CDD] via-[#65A7F5] to-[#FFDB00]
- bg-clip-text text-transparent pb-2"
+ bg-clip-text text-transparent"
             >
               Pigeon Post
             </div>
@@ -334,14 +370,15 @@ const App1 = () => {
                       placeholder="Enter Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="font-dm-sans w-full bg-transparent px-6 py-3  rounded-full outline-none  placeholder:text-[15px] lg:placeholder:text-[20px] placeholder:font-dm-sans"
+                      className="font-dm-sans w-full bg-transparent px-6 py-3 rounded-full outline-none placeholder:text-[15px] lg:placeholder:text-[20px] placeholder:font-dm-sans"
                     />
 
                     {/* Subscribe Button */}
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="font-dm-sans bg-black text-textColorCustom px-6 py-3 rounded-full text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
+                      className="font-dm-sans bg-black text-textColorCustom px-6 py-3 rounded-full text-[16px]"
+                      // Consistent padding and text size
                     >
                       {isSubmitting ? "Subscribing..." : "Subscribe"}
                     </button>
@@ -365,94 +402,92 @@ const App1 = () => {
         </section>
 
         {/* Footer */}
-        <footer className="relative px-4 py-8 mt-12 sm:px-6 sm:py-12 sm:mt-24 bg-black text-white">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 sm:gap-12">
-          {/* Company Description */}
-          <div className="space-y-4">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="flex items-center gap-2"
-            >
-              <h3 className="font-fingerPaint text-xl font-bold bg-gradient-to-r from-[#735CDD] via-[#65A7F5] to-[#FFDB00] bg-clip-text text-transparent">
-                Pigeon Post
-              </h3>
-            </motion.div>
-            <p className="text-sm text-gray-400">
-              Empowering creators to break through barriers and redefine what's possible.
-            </p>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h3 className="mb-4 text-lg font-medium">Legal</h3>
-            <ul className="space-y-2">
-              {["Privacy Policy", "Terms of Service"].map((item) => (
-                <li key={item}>
-                  <motion.a
-                    href="#"
-                    whileHover={{ x: 5 }}
-                    className="text-sm text-gray-400 transition-colors hover:text-white"
-                  >
-                    {item}
-                  </motion.a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <h3 className="mb-4 text-lg font-medium">Connect with us</h3>
-            <div className="flex space-x-4">
-              {[
-                { name: "Twitter", icon: <FaTwitter />, link: "#" },
-                { name: "Discord", icon: <FaDiscord />, link: "#" },
-                { name: "GitHub", icon: <FaGithub />, link: "#" },
-                { name: "LinkedIn", icon: <FaLinkedin />, link: "#" },
-              ].map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.link}
-                  whileHover={{ scale: 1.2 }}
-                  className="text-gray-400 hover:text-white text-2xl transition-colors"
+        <footer className="relative px-4 py-8 mt-12 sm:px-6 sm:py-12 sm:mt-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-4 sm:gap-12">
+              {/* Brand Column */}
+              <div className="space-y-4">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="flex items-center gap-2"
                 >
-                  {social.icon}
-                </motion.a>
-              ))}
+                  <h3 className="font-fingerPaint text-xl bg-gradient-to-r from-[#735CDD] via-[#65A7F5] to-[#FFDB00] bg-clip-text text-transparent">
+                    Pigeon Post
+                  </h3>
+                </motion.div>
+                <p className="text-sm text-gray-400">
+                  Empowering creators to break through barriers and redefine
+                  what's possible.
+                </p>
+              </div>
+
+              {/* Resources */}
+              <div>
+                <h3 className="mb-4 text-lg font-medium">Legal</h3>
+                <ul className="space-y-2">
+                  {["Privacy Policy", "Terms of Service", "Security"].map(
+                    (item) => (
+                      <li key={item}>
+                        <motion.a
+                          href="#"
+                          whileHover={{ x: 5 }}
+                          className="text-sm text-gray-400 transition-colors hover:text-white"
+                        >
+                          {item}
+                        </motion.a>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+              {/* Resources */}
+              <div>
+                <h3 className="mb-4 text-lg font-medium">Resources</h3>
+                <ul className="space-y-2">
+                  {["Documentation", "Tutorials", "Blog", "Support"].map(
+                    (item) => (
+                      <li key={item}>
+                        <motion.a
+                          href="#"
+                          whileHover={{ x: 5 }}
+                          className="text-sm text-gray-400 transition-colors hover:text-white"
+                        >
+                          {item}
+                        </motion.a>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+
+              {/* Social Links */}
+              <div>
+                <h3 className="mb-4 text-lg font-medium">Connect</h3>
+                <ul className="space-y-2">
+                  {["Twitter", "Discord", "GitHub", "LinkedIn"].map((item) => (
+                    <li key={item}>
+                      <motion.a
+                        href="#"
+                        whileHover={{ x: 5 }}
+                        className="text-sm text-gray-400 transition-colors hover:text-white"
+                      >
+                        {item}
+                      </motion.a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Copyright */}
+            <div className="pt-8 mt-12 text-sm text-center text-gray-400 border-t border-white/10">
+              <p>© 2025 Pigeon Post. All rights reserved.</p>
             </div>
           </div>
-        </div>
-
-        {/* SVG Animation */}
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute top-0 right-0 w-16 h-16 opacity-10"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-full h-full text-gray-500"
-          >
-            <path d="M3 3h18v18H3z" />
-          </svg>
-        </motion.div>
-
-        {/* Copyright */}
-        <div className="pt-8 mt-12 text-sm text-center text-gray-400 border-t border-white/10">
-          <p>© 2025 Pigeon Post. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>   
+        </footer>
       </main>
     </div>
   );
 };
 
-export default App1;
+export default App;
